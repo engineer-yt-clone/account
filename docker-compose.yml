@@ -1,8 +1,12 @@
 version: "3.7"
 
 volumes:
-  kong_data: {}
+  kong_data:
   db:
+  redis-data:
+  redis-conf:
+  consul-certs:
+  consul-json:
 
 networks:
   kong-net:
@@ -132,5 +136,32 @@ services:
       - db:/var/lib/mysql
     networks:
       - kong-net
+
+#  redis:
+#    image: "redis:alpine"
+#    command: redis-server
+#    expose:
+#      - "6379"
+#    volumes:
+#      - redis-data:/data
+#      - redis-conf:/usr/local/etc/redis/redis.conf
+#    networks:
+#      - kong-net
+
+#  consul-server:
+#    image: hashicorp/consul:1.11.2
+#    container_name: consul-server
+#    restart: always
+#    volumes:
+#      - consul-json:/consul/config/server1.json:ro
+#      - consul-certs:/consul/config/certs/:ro
+#    networks:
+#      - kong-net
+#    ports:
+#      - "8500:8500"
+#      - "8600:8600/tcp"
+#      - "8600:8600/udp"
+#    command: "agent -bootstrap-expect=3"
+
 
 
