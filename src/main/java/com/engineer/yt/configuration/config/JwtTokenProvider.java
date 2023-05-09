@@ -20,19 +20,19 @@ public class JwtTokenProvider {
 	private int jwtExpirationInMs;
 
 
-	public Long getUserIdFromJWT(String token) {
+	public String getEmailFromJWT(String token) {
+		this.validateToken(token);
 		Claims claims = Jwts.parser()
 				.setSigningKey(jwtSecret)
 				.parseClaimsJws(token)
 				.getBody();
 
-		return Long.valueOf(claims.getSubject());
+		return claims.getSubject();
 	}
 
-	public boolean validateToken(String authToken) {
+	public void validateToken(String authToken) {
 		try {
 			Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
-			return true;
 		} catch (SignatureException ex) {
 			LOGGER.error("Invalid JWT signature");
 		} catch (MalformedJwtException ex) {
@@ -44,7 +44,6 @@ public class JwtTokenProvider {
 		} catch (IllegalArgumentException ex) {
 			LOGGER.error("JWT claims string is empty");
 		}
-		return false;
 	}
 
 	public String generateToken(User user, int expiry) {
@@ -53,7 +52,7 @@ public class JwtTokenProvider {
 		Date expiryDate = new Date(now.getTime() + expiry);
 
 		return Jwts.builder()
-				.setSubject(Long.toString(user.getId()))
+				.setSubject(user.getEmail())
 				.setIssuedAt(new Date())
 				.setExpiration(expiryDate)
 				.signWith(SignatureAlgorithm.HS512, jwtSecret)

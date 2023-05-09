@@ -1,12 +1,10 @@
 version: "3.7"
 
 volumes:
-  kong_data:
-  db:
-  redis-data:
-  redis-conf:
-  consul-certs:
-  consul-json:
+  ${pwd}/db/kong_data:
+  ${pwd}/db/mysql:
+  ${pwd}/db/redis-data:
+  ${pwd}/db/consul:
 
 networks:
   kong-net:
@@ -133,35 +131,34 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - db:/var/lib/mysql
+      - ${pwd}/.db/mysql:/var/lib/mysql
     networks:
       - kong-net
 
-#  redis:
-#    image: "redis:alpine"
-#    command: redis-server
-#    expose:
-#      - "6379"
-#    volumes:
-#      - redis-data:/data
-#      - redis-conf:/usr/local/etc/redis/redis.conf
-#    networks:
-#      - kong-net
+  redis:
+    image: "redis:alpine"
+    command: redis-server
+    expose:
+      - "6379"
+    volumes:
+      - ${pwd}/.db/redis-data:/data
+    environment:
+      - REDIS_PASSWORD=yt-clone
+    networks:
+      - kong-net
 
-#  consul-server:
-#    image: hashicorp/consul:1.11.2
-#    container_name: consul-server
-#    restart: always
-#    volumes:
-#      - consul-json:/consul/config/server1.json:ro
-#      - consul-certs:/consul/config/certs/:ro
-#    networks:
-#      - kong-net
-#    ports:
-#      - "8500:8500"
-#      - "8600:8600/tcp"
-#      - "8600:8600/udp"
-#    command: "agent -bootstrap-expect=3"
+  consul-server:
+    image: consul:latest
+    container_name: consul-server
+    restart: always
+    volumes:
+      - ${pwd}/.db/consul:/consul/data
+    networks:
+      - kong-net
+    environment:
+      - CONSUL_BIND_INTERFACE=eth0
+    ports:
+      - "8500:8500"
 
 
 
