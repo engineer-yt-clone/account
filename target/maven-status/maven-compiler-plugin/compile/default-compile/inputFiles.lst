@@ -1,0 +1,16 @@
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/configuration/config/JwtTokenProvider.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/service/AuthService.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/configuration/config/AccountBeansProducer.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/ExampleResource.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/controller/AuthController.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/dto/request/SignUpRequest.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/dto/request/LoginRequest.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/dto/response/TokenResponse.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/entity/User.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/repository/UserRepository.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/common/constant/MessageConstant.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/service/AuthServiceImpl.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/dto/response/Response.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/configuration/lifecycle/AccountLifecycle.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/configuration/security/PasswordSecurity.java
+/Users/nvbinhsoft/Documents/dev/yt-clone/account/src/main/java/com/engineer/yt/configuration/config/RedisCache.java
