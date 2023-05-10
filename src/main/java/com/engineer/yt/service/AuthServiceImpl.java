@@ -1,8 +1,8 @@
 package com.engineer.yt.service;
 
-import com.engineer.yt.common.enums.MessageConstant;
+import com.engineer.yt.common.constant.MessageConstant;
 import com.engineer.yt.configuration.config.JwtTokenProvider;
-import com.engineer.yt.controller.PasswordSecurity;
+import com.engineer.yt.configuration.security.PasswordSecurity;
 import com.engineer.yt.dto.request.LoginRequest;
 import com.engineer.yt.dto.request.SignUpRequest;
 import com.engineer.yt.dto.response.TokenResponse;

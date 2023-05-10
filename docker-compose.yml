@@ -1,10 +1,5 @@
 version: "3.7"
 
-volumes:
-  ${pwd}/db/kong_data:
-  ${pwd}/db/mysql:
-  ${pwd}/db/redis-data:
-  ${pwd}/db/consul:
 
 networks:
   kong-net:
@@ -131,7 +126,7 @@ services:
     ports:
       - '3306:3306'
     volumes:
-      - ${pwd}/.db/mysql:/var/lib/mysql
+      - .db/mysql:/var/lib/mysql
     networks:
       - kong-net
 
@@ -141,7 +136,7 @@ services:
     expose:
       - "6379"
     volumes:
-      - ${pwd}/.db/redis-data:/data
+      - .db/redis-data:/data
     environment:
       - REDIS_PASSWORD=yt-clone
     networks:
@@ -152,7 +147,7 @@ services:
     container_name: consul-server
     restart: always
     volumes:
-      - ${pwd}/.db/consul:/consul/data
+      - .db/consul:/consul/data
     networks:
       - kong-net
     environment:

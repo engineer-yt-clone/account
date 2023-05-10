@@ -16,9 +16,6 @@ public class JwtTokenProvider {
 	@Value(value = "${app.jwtSecret}")
 	private String jwtSecret;
 
-	@Value(value = "${app.jwtExpirationInMs}")
-	private int jwtExpirationInMs;
-
 
 	public String getEmailFromJWT(String token) {
 		this.validateToken(token);
