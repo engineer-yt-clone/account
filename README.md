@@ -1,3 +1,5 @@
+[![Build and Push Docker Image](https://github.com/engineer-yt-clone/account/actions/workflows/build-ci.yml/badge.svg?branch=main)](https://github.com/engineer-yt-clone/account/actions/workflows/build-ci.yml)
+
 # account
 
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
