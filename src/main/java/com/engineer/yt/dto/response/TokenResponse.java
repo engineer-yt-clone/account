@@ -26,6 +26,9 @@ public class TokenResponse implements Serializable {
     @JsonProperty("timestamp")
     private Long timestamp;
 
+    public TokenResponse() {
+    }
+
     public TokenResponse(String id, String accessToken, long accessExpires, String refreshToken, long refreshExpires, Long timestamp) {
         this.id = id;
         this.accessToken = accessToken;
