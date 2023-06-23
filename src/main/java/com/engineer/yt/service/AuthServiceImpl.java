@@ -79,20 +79,25 @@ public class AuthServiceImpl implements AuthService{
         try{
             String email = tokenProvider.getEmailFromJWT(token.getRefreshToken());
             String key = this.getKeyOnRedis(email, MessageConstant.REFRESH_TOKEN);
-            Long ttl = redisClient.ttl(key).toLong();
-            if(Objects.nonNull(ttl) && ttl == -2L) throw new RuntimeException("The session has expired");
-            List<String> listKey = Arrays.asList(this.getKeyOnRedis(email, MessageConstant.ACCESS_TOKEN),
+            Long ttl = Optional.ofNullable(redisClient.ttl(key).toLong()).orElse(-2L);
+            if (ttl == -2L) {
+                throw new RuntimeException("The session has expired");
+            }
+            List<String> listKey = Arrays.asList(
+                    this.getKeyOnRedis(email, MessageConstant.ACCESS_TOKEN),
                     this.getKeyOnRedis(email, MessageConstant.REFRESH_TOKEN));
             redisClient.del(listKey);
 
             User user = new User();
             user.setEmail(email);
             int accessExpire = accessExpires < ttl ? accessExpires : ttl.intValue();
-            String accessToken = tokenProvider.generateToken(user, accessExpire );
+            String accessToken = tokenProvider.generateToken(user, accessExpire);
             String refreshToken = tokenProvider.generateToken(user, Math.toIntExact(ttl));
 
-            this.redisClient.setex(this.getKeyOnRedis(email, MessageConstant.ACCESS_TOKEN), String.valueOf(accessExpire), accessToken);
-            this.redisClient.setex(this.getKeyOnRedis(email, MessageConstant.REFRESH_TOKEN), String.valueOf(ttl), refreshToken);
+            this.redisClient.setex(this.getKeyOnRedis(email, MessageConstant.ACCESS_TOKEN),
+                    String.valueOf(accessExpire), accessToken);
+            this.redisClient.setex(this.getKeyOnRedis(email, MessageConstant.REFRESH_TOKEN),
+                    String.valueOf(ttl), refreshToken);
             return new TokenResponse(accessToken, accessExpires, refreshToken, refreshExpires
                     , System.currentTimeMillis());
 

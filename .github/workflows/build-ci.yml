@@ -36,5 +36,4 @@ jobs:
           from: Binh Nguyen Van
           subject: Github Actions job result
           body: ${{ github.job }} job in workflow ${{ github.workflow }} of ${{ github.repository }} has ${{ job.status }}
-          html_body: file://README.html
 
